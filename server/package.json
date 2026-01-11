@@ -5,13 +5,26 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "bun --watch run src/index.ts"
+    "dev": "bun --watch run src/index.ts",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev",
+    "open-auth-docs": "open-cli http://localhost:3000/api/auth/reference"
   },
   "dependencies": {
+    "@hono/zod-openapi": "^1.2.0",
+    "@hono/zod-validator": "^0.7.6",
+    "@prisma/client": "^6.2.1",
+    "@scalar/hono-api-reference": "^0.9.32",
+    "better-auth": "^1.4.10",
     "hono": "^4.10.8",
+    "resend": "^6.7.0",
     "shared": "workspace:*"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "open-cli": "^8.0.0",
+    "prisma": "^6.2.1"
   }
 }
