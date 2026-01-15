@@ -13,11 +13,13 @@
   ],
   "scripts": {
     "dev": "turbo dev",
+    "start": "bun run server/dist/index.js",
     "dev:client": "turbo dev --filter=client",
     "dev:server": "turbo dev --filter=server",
     "build": "turbo build",
     "build:client": "turbo build --filter=client",
     "build:server": "turbo build --filter=server",
+    "deploy:server": "cd server && bun run deploy",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "test": "turbo test",

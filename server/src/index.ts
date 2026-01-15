@@ -8,6 +8,7 @@ import { auth } from "./lib/auth";
 import { adminRoute } from "./features/admin/admin.route";
 import { recoveryRoute } from "./features/recovery/recovery.route";
 import { authRoute } from "./features/auth/auth.route";
+import env from "./lib/config";
 
 // Create base app with OpenAPIHono
 const app = new OpenAPIHono().basePath("/api");
@@ -61,7 +62,11 @@ app.get(
 // Apply error handler
 applyOnError(app);
 
-export default app;
+export default {
+  port: env.PORT || 3000,
+  hostname: "0.0.0.0",
+  fetch: app.fetch,
+};
 
 // ============ CLIENT TYPES ============
 // Create a typed representation for the client (using regular Hono for proper type inference)
