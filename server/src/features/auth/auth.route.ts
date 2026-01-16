@@ -36,8 +36,8 @@ export const authRoute = new Hono()
       });
     }
 
-    // Device binding only for USER role (students)
-    if (user.role === "USER") {
+    // Device binding only for USER role (students) with deviceId (mobile apps)
+    if (user.role === "USER" && deviceId) {
       const deviceCheck = await checkDeviceBinding(user.id, deviceId);
 
       if (!deviceCheck.allowed) {
@@ -51,13 +51,14 @@ export const authRoute = new Hono()
       }
     }
 
-    const response = await auth.api.signInEmail({ body: { email, password } });
-
-    return c.json({
-      success: true,
-      message: "Login successful",
-      data: { user: response.user, token: response.token },
+    // Get the full response with Set-Cookie headers
+    const response = await auth.api.signInEmail({
+      body: { email, password },
+      asResponse: true,
     });
+
+    // Return the response directly so cookies are set
+    return response;
   })
 
   // ============ SIGNUP ============
@@ -91,7 +92,7 @@ export const authRoute = new Hono()
           token: response.token,
         },
       },
-      201
+      201,
     );
   })
 
@@ -160,7 +161,7 @@ export const authRoute = new Hono()
         message: "Recovery request submitted successfully",
         data: { requestId: request.id },
       },
-      201
+      201,
     );
   })
 
@@ -187,5 +188,33 @@ export const authRoute = new Hono()
       success: true,
       message: "Recovery status retrieved",
       data: { status },
+    });
+  })
+
+  // ============ GET CURRENT USER ============
+  .get("/me", async (c) => {
+    const session = await auth.api.getSession({
+      headers: c.req.raw.headers,
+    });
+
+    if (!session) {
+      throw new HTTPException(401, { message: "Not authenticated" });
+    }
+
+    return c.json({
+      success: true,
+      user: session.user,
+    });
+  })
+
+  // ============ LOGOUT ============
+  .post("/logout", async (c) => {
+    await auth.api.signOut({
+      headers: c.req.raw.headers,
+    });
+
+    return c.json({
+      success: true,
+      message: "Logged out successfully",
     });
   });

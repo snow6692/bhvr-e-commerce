@@ -14,7 +14,7 @@ export const passwordSchema = z
 export const loginSchema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(1, "Password is required"),
-  deviceId: z.string().min(1, "Device ID is required"),
+  deviceId: z.string().optional(), // Optional for web clients
 });
 
 export const signupSchema = z.object({
@@ -54,27 +54,27 @@ export const signupValidator = zValidator("json", signupSchema, validationHook);
 export const forgotPasswordValidator = zValidator(
   "json",
   forgotPasswordSchema,
-  validationHook
+  validationHook,
 );
 export const resetPasswordValidator = zValidator(
   "json",
   resetPasswordSchema,
-  validationHook
+  validationHook,
 );
 export const googleAuthValidator = zValidator(
   "json",
   googleAuthSchema,
-  validationHook
+  validationHook,
 );
 export const recoveryRequestValidator = zValidator(
   "json",
   recoveryRequestSchema,
-  validationHook
+  validationHook,
 );
 export const emailQueryValidator = zValidator(
   "query",
   emailQuerySchema,
-  validationHook
+  validationHook,
 );
 
 // ============ TYPES ============

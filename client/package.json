@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite dev --port 5000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "router": "bun x @tanstack/router-cli generate"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",
     "@tanstack/react-query-devtools": "^5.91.2",
+    "@tanstack/router-cli": "^1.150.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.10.2",

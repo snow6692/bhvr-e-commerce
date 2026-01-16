@@ -5,16 +5,16 @@
 
 body {
   @apply m-0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 @theme inline {
@@ -134,4 +134,99 @@ code {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ============ Dashboard Layouts ============ */
+.admin-layout,
+.teacher-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar,
+.teacher-sidebar {
+  width: 250px;
+  @apply bg-sidebar text-sidebar-foreground border-r border-sidebar-border p-4;
+}
+
+.admin-sidebar h2,
+.teacher-sidebar h2 {
+  @apply text-lg font-bold mb-4;
+}
+
+.admin-sidebar nav a,
+.teacher-sidebar nav a {
+  @apply block py-2 px-3 rounded-md hover:bg-sidebar-accent transition-colors;
+}
+
+.admin-content,
+.teacher-content {
+  flex: 1;
+  @apply p-6;
+}
+
+.dashboard-page h1 {
+  @apply text-2xl font-bold mb-6;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  @apply bg-card text-card-foreground p-6 rounded-lg border shadow-sm;
+}
+
+.dashboard-card h3 {
+  @apply text-lg font-semibold mb-2;
+}
+
+.dashboard-card p {
+  @apply text-muted-foreground;
+}
+
+/* ============ Login Page ============ */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @apply bg-background;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  @apply bg-card p-8 rounded-lg border shadow-lg;
+}
+
+.login-container h1 {
+  @apply text-2xl font-bold text-center mb-6;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.form-group label {
+  @apply block text-sm font-medium mb-2;
+}
+
+.form-group input {
+  @apply w-full px-3 py-2 border rounded-md bg-input;
+}
+
+.form-group input:focus {
+  @apply outline-none ring-2 ring-ring;
+}
+
+.login-container button[type="submit"] {
+  @apply w-full py-2 px-4 bg-primary text-primary-foreground rounded-md font-medium;
+  @apply hover:opacity-90 transition-opacity disabled:opacity-50;
+}
+
+.error-message {
+  @apply bg-destructive/10 text-destructive p-3 rounded-md mb-4 text-sm;
 }

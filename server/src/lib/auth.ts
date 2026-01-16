@@ -11,7 +11,13 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
 
-  trustedOrigins: [env.CLIENT_URL],
+  trustedOrigins: env.CLIENT_URL.split(",").map((url) => url.trim()),
+
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: false, // Set to true if using subdomains
+    },
+  },
 
   emailAndPassword: {
     enabled: true,
